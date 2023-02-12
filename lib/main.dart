@@ -1,0 +1,20 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:headlines_repository/headlines_repository.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'app.dart';
+import 'news_bloc_observer.dart';
+
+void main() async {
+  var logger = Logger();
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = const NewsBlocObserver();
+  HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: kIsWeb
+          ? HydratedStorage.webStorageDirectory
+          : await getTemporaryDirectory());
+  runApp(NewsApp(headlinesRepository: HeadlinesRepository()));
+}
