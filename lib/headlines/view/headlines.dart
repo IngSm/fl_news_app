@@ -42,7 +42,8 @@ class _HealinesViewState extends State<HeadlinesView> {
         // ],
       ),
       body: Center(
-        child: Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: BlocConsumer<HeadlinesCubit, HeadlinesState>(
             listener: (context, state) {
               if (state.status.isSuccess) {
@@ -67,6 +68,7 @@ class _HealinesViewState extends State<HeadlinesView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.search, semanticLabel: 'Search'),
         onPressed: () async {
           // final city = await Navigator.of(context).push(SearchPage.route());

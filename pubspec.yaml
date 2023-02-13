@@ -39,6 +39,7 @@ dependencies:
   json_annotation: ^4.4.0
   path_provider: ^2.0.8
   logger: ^1.1.0
+  intl: ^0.18.0
   headlines_repository:
     path: packages/headlines_repository
 
