@@ -24,6 +24,20 @@ class HeadlinesView extends StatefulWidget {
 
 class _HealinesViewState extends State<HeadlinesView> {
   @override
+  void initState() {
+    super.initState();
+    context.read<HeadlinesCubit>().fetchHeadlines('us');
+  }
+
+  String country = 'us';
+
+  Future _showDialog() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => CountrySelection(value: country));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -32,14 +46,17 @@ class _HealinesViewState extends State<HeadlinesView> {
           'News App'.toUpperCase(),
           style: const TextStyle(color: Color(0xFFF7F5DD), fontSize: 40),
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(Icons.settings),
-        //     onPressed: () {
-        //       Navigator.of(context).push<void>(route)
-        //     },
-        //   );
-        // ],
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              color: Color(0xFFF7F5DD),
+            ),
+            onPressed: () {
+              print('!!!');
+            },
+          )
+        ],
       ),
       body: Center(
         child: Padding(
@@ -72,9 +89,9 @@ class _HealinesViewState extends State<HeadlinesView> {
         child: const Icon(Icons.search,
             semanticLabel: 'Search', color: Color(0xFFF7F5DD)),
         onPressed: () async {
-          // final city = await Navigator.of(context).push(SearchPage.route());
+          final country = await _showDialog();
           if (!mounted) return;
-          await context.read<HeadlinesCubit>().fetchHeadlines('us');
+          await context.read<HeadlinesCubit>().fetchHeadlines(country);
         },
       ),
     );
