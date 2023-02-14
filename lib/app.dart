@@ -32,6 +32,7 @@ class NewsAppView extends StatelessWidget {
       builder: (context, color) {
         return MaterialApp(
           theme: ThemeData(
+              useMaterial3: true,
               primaryColor: const Color(0xFFBB2649),
               colorScheme: const ColorScheme(
                 brightness: Brightness.dark,
@@ -47,7 +48,7 @@ class NewsAppView extends StatelessWidget {
                 onSurface: Color(0xFFFFF5F6),
               ),
               brightness: Brightness.dark,
-              textTheme: GoogleFonts.getTextTheme('Indie Flower')
+              textTheme: GoogleFonts.getTextTheme('Montserrat Alternates')
                   .apply(bodyColor: const Color(0xFFF7F5DD))),
           home: const HeadlinesPage(),
         );

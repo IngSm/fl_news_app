@@ -69,7 +69,8 @@ class _HealinesViewState extends State<HeadlinesView> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.search, semanticLabel: 'Search'),
+        child: const Icon(Icons.search,
+            semanticLabel: 'Search', color: Color(0xFFF7F5DD)),
         onPressed: () async {
           // final city = await Navigator.of(context).push(SearchPage.route());
           if (!mounted) return;
