@@ -1,18 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:fl_news_app/headlines/headlines.dart';
-import 'package:headlines_repository/headlines_repository.dart'
-    show HeadlinesRepository;
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart';
+import 'package:news_repository/news_repository.dart' show NewsRepository;
 
 part 'headlines_cubit.g.dart';
 part 'headlines_state.dart';
 
 class HeadlinesCubit extends HydratedCubit<HeadlinesState> {
-  HeadlinesCubit(this._headlinesRepository) : super(HeadlinesState());
+  HeadlinesCubit(this._newsRepository) : super(HeadlinesState());
 
-  final HeadlinesRepository _headlinesRepository;
+  final NewsRepository _newsRepository;
   var logger = Logger();
 
   Future<void> fetchHeadlines(String? country) async {
@@ -23,7 +22,7 @@ class HeadlinesCubit extends HydratedCubit<HeadlinesState> {
     try {
       logger.i('Fetching headlines...');
       final headlines = Headlines.fromRepository(
-          await _headlinesRepository.getHeadlines(country: country));
+          await _newsRepository.getHeadlines(country: country));
       emit(state.copyWith(
           status: HeadlinesStatus.success, headlines: headlines));
     } on Exception catch (e) {
@@ -38,13 +37,4 @@ class HeadlinesCubit extends HydratedCubit<HeadlinesState> {
 
   @override
   Map<String, dynamic> toJson(HeadlinesState state) => state.toJson();
-
-  // TODO: implement method, but before add `country` field to repo.
-  // Future<void> refreshHeadlines() async {
-  //   if (!state.status.isSuccess) return;
-  //   if (state.headlines == Headlines.empty) return;
-  //   try {
-  //     final healines = Headlines.fromRepository(await _headlinesRepository.getHeadlines());
-  //   }
-  // }
 }

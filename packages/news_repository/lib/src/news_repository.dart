@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:headlines_repository/headlines_repository.dart';
 import 'package:logger/logger.dart';
 import 'package:news_api/news_api.dart' hide Headlines;
+import 'package:news_repository/news_repository.dart';
 
-class HeadlinesRepository {
-  HeadlinesRepository({NewsApiClient? newsApiClient})
+class NewsRepository {
+  NewsRepository({NewsApiClient? newsApiClient})
       : _newsApiClient = newsApiClient ?? NewsApiClient();
 
   final NewsApiClient _newsApiClient;

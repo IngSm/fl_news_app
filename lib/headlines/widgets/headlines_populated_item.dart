@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:headlines_repository/headlines_repository.dart';
 import 'package:intl/intl.dart';
+import 'package:news_repository/news_repository.dart';
 
 class HeadlinesPopulatedItem extends StatelessWidget {
   const HeadlinesPopulatedItem({Key? key, required this.article})

@@ -1,4 +1,4 @@
-name: headlines_repository
+name: news_repository
 description: A Dart Repository which manages the headlines domain.
 version: 1.0.0+1
 publish_to: none

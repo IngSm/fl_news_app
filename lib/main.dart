@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:headlines_repository/headlines_repository.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:news_repository/news_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
@@ -14,5 +14,5 @@ void main() async {
       storageDirectory: kIsWeb
           ? HydratedStorage.webStorageDirectory
           : await getTemporaryDirectory());
-  runApp(NewsApp(headlinesRepository: HeadlinesRepository()));
+  runApp(NewsApp(newsRepository: NewsRepository()));
 }

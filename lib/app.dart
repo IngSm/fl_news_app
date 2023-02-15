@@ -3,18 +3,18 @@ import 'package:fl_news_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:headlines_repository/headlines_repository.dart';
+import 'package:news_repository/news_repository.dart';
 
 class NewsApp extends StatelessWidget {
-  const NewsApp({super.key, required HeadlinesRepository headlinesRepository})
-      : _headlinesRepository = headlinesRepository;
+  const NewsApp({super.key, required NewsRepository newsRepository})
+      : _newsRepository = newsRepository;
 
-  final HeadlinesRepository _headlinesRepository;
+  final NewsRepository _newsRepository;
 
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
-      value: _headlinesRepository,
+      value: _newsRepository,
       child: BlocProvider(
         create: (_) => ThemeCubit(),
         child: const NewsAppView(),
