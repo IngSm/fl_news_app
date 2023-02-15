@@ -1,7 +1,7 @@
 import 'package:fl_news_app/headlines/headlines.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:headlines_repository/headlines_repository.dart';
+import 'package:news_repository/news_repository.dart';
 
 class HeadlinesPage extends StatelessWidget {
   const HeadlinesPage({super.key});
@@ -9,7 +9,7 @@ class HeadlinesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HeadlinesCubit(context.read<HeadlinesRepository>()),
+      create: (context) => HeadlinesCubit(context.read<NewsRepository>()),
       child: const HeadlinesView(),
     );
   }

@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:headlines_repository/headlines_repository.dart'
-    as headlines_repository;
-import 'package:headlines_repository/headlines_repository.dart' hide Headlines;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:news_repository/news_repository.dart' as headlines_repository;
+import 'package:news_repository/news_repository.dart' hide Headlines;
 
 part 'headlines.g.dart';
 
