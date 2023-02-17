@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:logger/logger.dart';
-import 'package:news_api/news_api.dart' hide Headlines;
+import 'package:news_api/news_api.dart' hide Headlines, Sources;
 import 'package:news_repository/news_repository.dart';
 
 class NewsRepository {
@@ -20,5 +20,13 @@ class NewsRepository {
     return Headlines(
       articles: headlines.articles,
     );
+  }
+
+  Future<Sources> getSources({String country = 'us'}) async {
+    Map<String, String> params = {'country': country};
+
+    final sources = await _newsApiClient.getSources(params);
+
+    return Sources(sources: sources.sources);
   }
 }

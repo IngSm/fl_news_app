@@ -15,6 +15,16 @@ class Source {
 
   factory Source.fromJson(Map<String, dynamic> json) => _$SourceFromJson(json);
 
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "url": url,
+        "category": category,
+        "language": language,
+        "country": country,
+      };
+
   final String? id;
   final String? name;
   final String? description;
