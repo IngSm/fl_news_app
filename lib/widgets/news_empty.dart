@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HeadlinesEmpty extends StatelessWidget {
-  const HeadlinesEmpty({super.key});
+class NewsEmpty extends StatelessWidget {
+  const NewsEmpty({super.key});
 
   @override
   Widget build(BuildContext context) {

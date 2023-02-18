@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HeadlinesError extends StatelessWidget {
-  const HeadlinesError({super.key});
+class NewsError extends StatelessWidget {
+  const NewsError({super.key});
 
   @override
   Widget build(BuildContext context) {

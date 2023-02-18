@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HeadlinesLoading extends StatelessWidget {
-  const HeadlinesLoading({super.key});
+class NewsLoading extends StatelessWidget {
+  const NewsLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class HeadlinesLoading extends StatelessWidget {
       children: [
         const Text('📰', style: TextStyle(fontSize: 64)),
         Text(
-          'Loading Headlines',
+          'Loading...',
           style: theme.textTheme.headlineSmall,
         ),
         const Padding(
