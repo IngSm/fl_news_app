@@ -1,4 +1,6 @@
+import 'package:fl_news_app/articles/articles.dart';
 import 'package:fl_news_app/headlines/headlines.dart';
+import 'package:fl_news_app/sources/sources.dart';
 import 'package:fl_news_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +52,12 @@ class NewsAppView extends StatelessWidget {
               brightness: Brightness.dark,
               textTheme: GoogleFonts.getTextTheme('Montserrat Alternates')
                   .apply(bodyColor: const Color(0xFFF7F5DD))),
-          home: const HeadlinesPage(),
+          routes: {
+            '/': (context) => const HeadlinesPage(),
+            '/sources': (context) => const SourcesPage(),
+            '/articles': (context) => const ArticlesPage(),
+          },
+          initialRoute: '/',
         );
       },
     );

@@ -41,23 +41,13 @@ class _HealinesViewState extends State<HeadlinesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text(
-          'News App'.toUpperCase(),
-          style: const TextStyle(color: Color(0xFFF7F5DD), fontSize: 40),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Color(0xFFF7F5DD),
-            ),
-            onPressed: () {
-              print('!!!');
-            },
-          )
-        ],
+      appBar: SharedAppBar(
+        title: 'News App',
+        appBar: AppBar(),
+      ),
+      bottomNavigationBar: SharedBottomAppBar(
+        selectedIndex: 0,
+        context: context,
       ),
       body: Center(
         child: Padding(
