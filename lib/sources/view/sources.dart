@@ -1,33 +1,33 @@
-import 'package:fl_news_app/headlines/headlines.dart';
+import 'package:fl_news_app/sources/sources.dart';
 import 'package:fl_news_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_repository/news_repository.dart';
 
-class HeadlinesPage extends StatelessWidget {
-  const HeadlinesPage({super.key});
+class SourcesPage extends StatelessWidget {
+  const SourcesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HeadlinesCubit(context.read<NewsRepository>()),
-      child: const HeadlinesView(),
+      create: (context) => SourcesCubit(context.read<NewsRepository>()),
+      child: const SourcesView(),
     );
   }
 }
 
-class HeadlinesView extends StatefulWidget {
-  const HeadlinesView({super.key});
+class SourcesView extends StatefulWidget {
+  const SourcesView({super.key});
 
   @override
-  State<HeadlinesView> createState() => _HealinesViewState();
+  State<SourcesView> createState() => _SourcesViewState();
 }
 
-class _HealinesViewState extends State<HeadlinesView> {
+class _SourcesViewState extends State<SourcesView> {
   @override
   void initState() {
     super.initState();
-    context.read<HeadlinesCubit>().fetchHeadlines('us');
+    context.read<SourcesCubit>().fetchSources('us');
   }
 
   String country = 'us';
@@ -46,13 +46,13 @@ class _HealinesViewState extends State<HeadlinesView> {
         appBar: AppBar(),
       ),
       bottomNavigationBar: SharedBottomAppBar(
-        selectedIndex: 0,
+        selectedIndex: 1,
         context: context,
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: BlocConsumer<HeadlinesCubit, HeadlinesState>(
+          child: BlocConsumer<SourcesCubit, SourcesState>(
             listener: (context, state) {
               if (state.status.isSuccess) {
                 print('SUCCESS!');
@@ -60,15 +60,15 @@ class _HealinesViewState extends State<HeadlinesView> {
             },
             builder: (context, state) {
               switch (state.status) {
-                case HeadlinesStatus.initial:
+                case SourcesStatus.initial:
                   return const NewsEmpty();
-                case HeadlinesStatus.loading:
+                case SourcesStatus.loading:
                   return const NewsLoading();
-                case HeadlinesStatus.success:
-                  return HeadlinesPopulated(
-                    headlines: state.headlines,
+                case SourcesStatus.success:
+                  return SourcesPopulated(
+                    sources: state.sources,
                   );
-                case HeadlinesStatus.failure:
+                case SourcesStatus.failure:
                   return const NewsError();
               }
             },
@@ -82,7 +82,7 @@ class _HealinesViewState extends State<HeadlinesView> {
         onPressed: () async {
           final country = await _showDialog();
           if (!mounted) return;
-          await context.read<HeadlinesCubit>().fetchHeadlines(country);
+          await context.read<SourcesCubit>().fetchSources(country);
         },
       ),
     );

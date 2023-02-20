@@ -67,7 +67,7 @@ class NewsApiClient {
 
   Future<Sources> getSources(Map<String, String> params) async {
     final sourcesRequest =
-        Uri.https(_baseUrl, '/top-headlines/sources', params);
+        Uri.https(_baseUrl, '/v2/top-headlines/sources', params);
 
     final sourcesResponse =
         await _httpClient.get(sourcesRequest, headers: httpHeader);
@@ -76,6 +76,11 @@ class NewsApiClient {
 
     final sourcesJson = jsonDecode(sourcesResponse.body) as Map;
 
-    return Sources.fromJson(sourcesJson as Map<String, dynamic>);
+    try {
+      return Sources.fromJson(sourcesJson as Map<String, dynamic>);
+    } catch (e) {
+      logger.w(e);
+      return const Sources(status: 'Fai;ure', sources: []);
+    }
   }
 }
