@@ -14,15 +14,13 @@ class HeadlinesCubit extends HydratedCubit<HeadlinesState> {
   final NewsRepository _newsRepository;
   var logger = Logger();
 
-  Future<void> fetchHeadlines(String? country) async {
-    if (country == null || country.isEmpty) return;
-
+  Future<void> fetchHeadlines(Map<String, String> params) async {
     emit(state.copyWith(status: HeadlinesStatus.loading));
 
     try {
       logger.i('Fetching headlines...');
-      final headlines = Headlines.fromRepository(
-          await _newsRepository.getHeadlines(country: country));
+      final headlines =
+          Headlines.fromRepository(await _newsRepository.getHeadlines(params));
       emit(state.copyWith(
           status: HeadlinesStatus.success, headlines: headlines));
     } on Exception catch (e) {

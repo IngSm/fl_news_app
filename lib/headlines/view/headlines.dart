@@ -27,15 +27,15 @@ class _HealinesViewState extends State<HeadlinesView> {
   @override
   void initState() {
     super.initState();
-    context.read<HeadlinesCubit>().fetchHeadlines('us');
+    context.read<HeadlinesCubit>().fetchHeadlines(params);
   }
 
-  String country = 'us';
+  Map<String, String> params = {'country': 'us'};
 
   Future _showDialog() {
     return showDialog(
         context: context,
-        builder: (BuildContext context) => CountrySelection(value: country));
+        builder: (BuildContext context) => const CountrySelection(value: 'us'));
   }
 
   @override
@@ -82,7 +82,8 @@ class _HealinesViewState extends State<HeadlinesView> {
         onPressed: () async {
           final country = await _showDialog();
           if (!mounted) return;
-          await context.read<HeadlinesCubit>().fetchHeadlines(country);
+          params['country'] = country;
+          await context.read<HeadlinesCubit>().fetchHeadlines(params);
         },
       ),
     );

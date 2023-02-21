@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:logger/logger.dart';
 import 'package:news_api/news_api.dart' hide Headlines, Sources;
 import 'package:news_repository/news_repository.dart';
 
@@ -9,12 +8,7 @@ class NewsRepository {
       : _newsApiClient = newsApiClient ?? NewsApiClient();
 
   final NewsApiClient _newsApiClient;
-  var logger = Logger();
-
-  Future<Headlines> getHeadlines({String country = 'us'}) async {
-    // TODO: implement method to form Map with parametrs from string. Params should be separated with comma.
-    Map<String, String> params = {'country': country};
-
+  Future<Headlines> getHeadlines(Map<String, String> params) async {
     final headlines = await _newsApiClient.getHeadlines(params);
 
     return Headlines(
