@@ -1,7 +1,10 @@
 import 'package:fl_news_app/articles/articles.dart';
 import 'package:fl_news_app/headlines/headlines.dart';
+import 'package:fl_news_app/search_config/search_config.dart';
 import 'package:fl_news_app/sources/sources.dart';
 import 'package:fl_news_app/theme/theme.dart';
+import 'package:fl_news_app/widgets/shared_app_bar.dart';
+import 'package:fl_news_app/widgets/shared_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,14 +22,16 @@ class NewsApp extends StatelessWidget {
       value: _newsRepository,
       child: BlocProvider(
         create: (_) => ThemeCubit(),
-        child: const NewsAppView(),
+        child: NewsAppView(),
       ),
     );
   }
 }
 
 class NewsAppView extends StatelessWidget {
-  const NewsAppView({super.key});
+  NewsAppView({super.key});
+
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +57,38 @@ class NewsAppView extends StatelessWidget {
               brightness: Brightness.dark,
               textTheme: GoogleFonts.getTextTheme('Montserrat Alternates')
                   .apply(bodyColor: const Color(0xFFF7F5DD))),
-          routes: {
-            '/': (context) => const HeadlinesPage(),
-            '/sources': (context) => const SourcesPage(),
-            '/articles': (context) => const ArticlesPage(),
-          },
-          initialRoute: '/',
+          home: Scaffold(
+            appBar: SharedAppBar(
+              context: context,
+              title: 'News App',
+              appBar: AppBar(),
+            ),
+            bottomNavigationBar: SharedBottomAppBar(
+              navigatorKey: _navigatorKey,
+              context: context,
+            ),
+            body: Navigator(
+                key: _navigatorKey,
+                initialRoute: '/',
+                onGenerateRoute: (RouteSettings settings) {
+                  return MaterialPageRoute(
+                      settings: settings,
+                      builder: (BuildContext context) {
+                        switch (settings.name) {
+                          case '/':
+                            return const HeadlinesPage();
+                          case '/sources':
+                            return const SourcesPage();
+                          case '/articles':
+                            return const ArticlesPage();
+                          case '/config':
+                            return const SearchConfig();
+                          default:
+                            return const HeadlinesPage();
+                        }
+                      });
+                }),
+          ),
         );
       },
     );

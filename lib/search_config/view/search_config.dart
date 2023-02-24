@@ -24,7 +24,11 @@ class _SearchConfigState extends State<SearchConfig> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SharedAppBar(title: 'Search', appBar: AppBar()),
+      appBar: SharedAppBar(
+        title: 'Search',
+        appBar: AppBar(),
+        context: context,
+      ),
       body: Column(
         children: [
           const TextField(

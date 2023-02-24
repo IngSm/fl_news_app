@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 
-class SharedBottomAppBar extends StatelessWidget {
+class SharedBottomAppBar extends StatefulWidget {
   const SharedBottomAppBar(
-      {Key? key, required this.context, required this.selectedIndex})
+      {Key? key, required this.context, required this.navigatorKey})
       : super(key: key);
 
-  final int selectedIndex;
   final BuildContext context;
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  @override
+  State<SharedBottomAppBar> createState() => _SharedBottomAppBarState();
+}
+
+class _SharedBottomAppBarState extends State<SharedBottomAppBar> {
+  int _index = 0;
 
   void _onItemTapped(int index) {
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, '/');
+        _index = 0;
+        widget.navigatorKey.currentState?.pushNamed('/');
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, '/sources');
+        _index = 1;
+        widget.navigatorKey.currentState?.pushNamed('/sources');
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, '/articles');
+        _index = 2;
+        widget.navigatorKey.currentState?.pushNamed('/articles');
         break;
     }
   }
@@ -32,7 +42,7 @@ class SharedBottomAppBar extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(Icons.article), label: 'Articles'),
       ],
       backgroundColor: Theme.of(context).primaryColor,
-      currentIndex: selectedIndex,
+      currentIndex: _index,
       selectedItemColor: const Color(0xFFF7F5DD),
       onTap: _onItemTapped,
     );

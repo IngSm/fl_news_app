@@ -41,14 +41,6 @@ class _SourcesViewState extends State<SourcesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SharedAppBar(
-        title: 'News App',
-        appBar: AppBar(),
-      ),
-      bottomNavigationBar: SharedBottomAppBar(
-        selectedIndex: 1,
-        context: context,
-      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
