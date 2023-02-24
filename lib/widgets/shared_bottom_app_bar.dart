@@ -13,20 +13,20 @@ class SharedBottomAppBar extends StatefulWidget {
 }
 
 class _SharedBottomAppBarState extends State<SharedBottomAppBar> {
-  int _index = 0;
+  var _index = 0;
 
   void _onItemTapped(int index) {
+    setState(() {
+      _index = index;
+    });
     switch (index) {
       case 0:
-        _index = 0;
         widget.navigatorKey.currentState?.pushNamed('/');
         break;
       case 1:
-        _index = 1;
         widget.navigatorKey.currentState?.pushNamed('/sources');
         break;
       case 2:
-        _index = 2;
         widget.navigatorKey.currentState?.pushNamed('/articles');
         break;
     }
