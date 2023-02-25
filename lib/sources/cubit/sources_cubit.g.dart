@@ -17,6 +17,11 @@ SourcesState _$SourcesStateFromJson(Map<String, dynamic> json) =>
               (v) =>
                   $enumDecodeNullable(_$SourcesStatusEnumMap, v) ??
                   SourcesStatus.initial),
+          sources: $checkedConvert(
+              'sources',
+              (v) => v == null
+                  ? null
+                  : Sources.fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },
@@ -25,6 +30,7 @@ SourcesState _$SourcesStateFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SourcesStateToJson(SourcesState instance) =>
     <String, dynamic>{
       'status': _$SourcesStatusEnumMap[instance.status]!,
+      'sources': instance.sources.toJson(),
     };
 
 const _$SourcesStatusEnumMap = {
