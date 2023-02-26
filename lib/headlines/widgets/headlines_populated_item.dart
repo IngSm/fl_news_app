@@ -22,14 +22,14 @@ class HeadlinesPopulatedItem extends StatelessWidget {
               Text(
                 article?.title ?? '',
                 style: const TextStyle(
-                  fontSize: 30,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFFFFF5F6),
                 ),
               ),
               Text(
                 article?.description ?? '',
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 18),
               ),
               Align(
                 alignment: Alignment.bottomRight,

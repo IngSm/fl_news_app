@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SharedAppBar(
       {Key? key,
+      required this.navigatorKey,
       required this.context,
       required this.title,
       required this.appBar})
       : super(key: key);
 
+  final GlobalKey<NavigatorState> navigatorKey;
   final BuildContext context;
   final AppBar appBar;
   final String title;
 
   void _pressHandler() {
+    // navigatorKey.currentState?.pushNamed('/config');
     Navigator.pushNamed(context, '/config');
   }
 

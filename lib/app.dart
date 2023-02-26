@@ -59,6 +59,7 @@ class NewsAppView extends StatelessWidget {
                   .apply(bodyColor: const Color(0xFFF7F5DD))),
           home: Scaffold(
             appBar: SharedAppBar(
+              navigatorKey: _navigatorKey,
               context: context,
               title: 'News App',
               appBar: AppBar(),
@@ -67,27 +68,36 @@ class NewsAppView extends StatelessWidget {
               navigatorKey: _navigatorKey,
               context: context,
             ),
-            body: Navigator(
-                key: _navigatorKey,
-                initialRoute: '/',
-                onGenerateRoute: (RouteSettings settings) {
-                  return MaterialPageRoute(
-                      settings: settings,
-                      builder: (BuildContext context) {
-                        switch (settings.name) {
-                          case '/':
-                            return const HeadlinesPage();
-                          case '/sources':
-                            return const SourcesPage();
-                          case '/articles':
-                            return const ArticlesPage();
-                          case '/config':
-                            return const SearchConfig();
-                          default:
-                            return const HeadlinesPage();
-                        }
-                      });
-                }),
+            body: WillPopScope(
+              onWillPop: () async {
+                if (_navigatorKey.currentState!.canPop()) {
+                  _navigatorKey.currentState!.pop();
+                  return false;
+                }
+                return true;
+              },
+              child: Navigator(
+                  key: _navigatorKey,
+                  initialRoute: '/',
+                  onGenerateRoute: (RouteSettings settings) {
+                    return MaterialPageRoute(
+                        settings: settings,
+                        builder: (BuildContext context) {
+                          switch (settings.name) {
+                            case '/':
+                              return const HeadlinesPage();
+                            case '/sources':
+                              return const SourcesPage();
+                            case '/articles':
+                              return const ArticlesPage();
+                            case '/config':
+                              return const SearchConfig();
+                            default:
+                              return const HeadlinesPage();
+                          }
+                        });
+                  }),
+            ),
           ),
         );
       },

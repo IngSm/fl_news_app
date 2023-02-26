@@ -1,4 +1,3 @@
-import 'package:fl_news_app/widgets/shared_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class SearchConfig extends StatefulWidget {
@@ -23,34 +22,27 @@ class _SearchConfigState extends State<SearchConfig> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SharedAppBar(
-        title: 'Search',
-        appBar: AppBar(),
-        context: context,
-      ),
-      body: Column(
-        children: [
-          const TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: 'Keywords...'),
-          ),
-          DropdownButton(
-              items:
-                  newsCatrgoryItems.map<DropdownMenuItem<String>>((String val) {
-                return DropdownMenuItem<String>(
-                  value: val,
-                  child: Text(val),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  category = value!;
-                });
-              })
-        ],
-      ),
+    return Column(
+      children: [
+        const TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(), labelText: 'Keywords...'),
+        ),
+        DropdownButton(
+            items:
+                newsCatrgoryItems.map<DropdownMenuItem<String>>((String val) {
+              return DropdownMenuItem<String>(
+                value: val,
+                child: Text(val),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                category = value!;
+              });
+            })
+      ],
     );
   }
 }
